@@ -1,0 +1,24 @@
+<div>
+    <h1>Formulaire de Contact</h1>
+    <p>Merci de remplir ce formulaire pour nous contacter :</p>
+</div>
+<form action="?c=Contact&a=enregistrer" method="post" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="nom" class="form-label">Votre nom</label>
+        <input type="text" class="form-control" name="nom" id="titre" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="mail" class="form-label">Votre mail</label>
+        <input type="email" class="form-control" name="mail" id="auteur" required>
+    </div>
+
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" name="description" id="description" rows="3" required></textarea>
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary" id="enregistrer">Enregistrer</button>
+    </div>
+</form>
