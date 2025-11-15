@@ -51,13 +51,17 @@ class RecetteController {
 
     // Fonction permettant de lister les recettes
     function index() {
+        $favoriController = new FavoriController();
         $recipes = $this->recetteModel->findAll();
         require_once("src/Views/recettes/liste.php");
     }
 
     function detail($id) {
+        // Ajout du contrôleur des favoris
+        $favoriController = new FavoriController();
+        $existe = $favoriController->existe($id, isset($_SESSION['id']) ?$_SESSION['id']:null);
         $recipe = $this->recetteModel->find($id);
-        require_once("src/Views/recettes/detail.php");
+        require_once('src/Views/recettes/detail.php');
     }
 
     function modifier($id) {

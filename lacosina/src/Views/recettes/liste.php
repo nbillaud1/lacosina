@@ -5,7 +5,17 @@
     <div class="row">
         <!-- Boucle permettant de lister les recettes -->
         <?php foreach ($recipes as $recipe) : ?>
+            <?php $existe = $favoriController->existe($recipe['id'], isset($_SESSION['id']) ?$_SESSION['id']:null); ?>
             <div class="col-4 p-2">
+                <!-- Affichage du coeur rempli ou vide en fonction de si la recette est dans les favoris de l'utilisateur -->
+                <?php if(isset($_SESSION['identifiant'])) {?>
+                    <span class="modif" data-id="<?php echo $recipe['id'] ?>"><i class="bi bi-pencil-square"></i></span>
+                    <?php if($existe){ ?>
+                        <span class="recipfav" data-id="<?php echo $recipe['id'] ?>"><i class="bi bi-heart-fill"></i></span>
+                    <?php } else{?>
+                        <span class="recipfav" data-id="<?php echo $recipe['id'] ?>"><i class="bi bi-heart"></i></span>
+                    <?php }?>
+                <?php } ?>
                 <!-- Utilisation des Cards Bootstrap -->
                 <div class="recipe card" data-id="<?php echo $recipe['id']; ?>">
                     <div class="card-body">

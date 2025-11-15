@@ -8,6 +8,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
 rel="stylesheet" integrity="sha384-
 QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 <script
 src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
 integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
@@ -32,6 +33,9 @@ crossorigin="anonymous"></script>
             <li class="nav-item">
                 <a class="nav-link" href="?c=Recette&a=ajouter">Ajouter une recette</a>
             </li>
+            <li>
+                <a href="?c=Favori&a=favoris" class="nav-link">Mes recettes favorites</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="?c=User&a=profil">Profil de <?php echo $_SESSION['identifiant']?></a>
             </li>
@@ -51,7 +55,12 @@ crossorigin="anonymous"></script>
             </li>
         <?php } ?>
     </ul>
-
 </nav>
+<?php if(isset($_SESSION['message'])) : ?>
+    <?php foreach ($_SESSION['message'] as $type => $message) { ?>
+        <div class="alert alert-<?php echo $type; ?>">
+            <?php echo $message; ?>
+        </div>
+<?php } endif; unset($_SESSION['message']); ?>
 <!-- corps de la page -->
 <div class="container w-75 m-auto">
