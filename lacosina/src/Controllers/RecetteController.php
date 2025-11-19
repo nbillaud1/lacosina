@@ -1,7 +1,8 @@
 <?php
 
-// connexion à la base de données
 require_once("src/Models/Recette.php");
+
+//namespace App\R301\Controller;
 
 class RecetteController {
 
@@ -59,14 +60,32 @@ class RecetteController {
     function detail($id) {
         // Ajout du contrôleur des favoris
         $favoriController = new FavoriController();
+        $commentaireController = new CommentaireController();
         $existe = $favoriController->existe($id, isset($_SESSION['id']) ?$_SESSION['id']:null);
         $recipe = $this->recetteModel->find($id);
+        $commentaires = $commentaireController->lister($id);
         require_once('src/Views/recettes/detail.php');
     }
 
     function modifier($id) {
         $recipe = $this->recetteModel->find($id);
         require_once("src/Views/recettes/modif.php");
+    }
+
+    function listerCommentaires(){
+        $commentaireController = new CommentaireController();
+        $commentaires = $commentaireController->listerTousLesCommentaires();
+        require_once("src/Views/recettes/commentaires.php");
+    }
+
+    function supprimer($id){
+        $favoriController = new FavoriController();
+        $commentaireController = new CommentaireController();
+        $this->recetteModel->delete($id);
+        $favoriController->supprimer($id);
+        $commentaireController->supprimerParRecette($id);
+        $_SESSION['message'] = ['success' => 'Recette supprimée avec succès'];
+        header("Location: ?c=home");
     }
 
 }

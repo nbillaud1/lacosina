@@ -50,6 +50,7 @@ class UserController {
             $_SESSION['id'] = $user['id'];
             $_SESSION['identifiant'] = $user['identifiant'];
             $_SESSION['mail'] = $user['mail'];
+            $_SESSION['isAdmin'] = $user['isAdmin'];
 
             header('Location: ?c=home'); // pour refresh la page quand on se connecte
         }

@@ -10,6 +10,7 @@
                 <!-- Affichage du coeur rempli ou vide en fonction de si la recette est dans les favoris de l'utilisateur -->
                 <?php if(isset($_SESSION['identifiant'])) {?>
                     <span class="modif" data-id="<?php echo $recipe['id'] ?>"><i class="bi bi-pencil-square"></i></span>
+                    <span class="supp-recette" data-id="<?php echo $recipe['id'] ?>"><i class="bi bi-trash"></i></span>
                     <?php if($existe){ ?>
                         <span class="recipfav" data-id="<?php echo $recipe['id'] ?>"><i class="bi bi-heart-fill"></i></span>
                     <?php } else{?>

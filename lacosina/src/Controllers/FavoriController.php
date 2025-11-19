@@ -23,13 +23,13 @@ class FavoriController {
         if (count($ajout) == 0) {
             $this->favoriModel->add($id_recette, $id_utilisateur);
         }
-        header("Location: " . strtok($_SERVER['REQUEST_URI'], '?'));
+        header("Location: ?c=home");
     }
 
     public function supprimer($id_recette){
         $id_utilisateur = $_SESSION['id'];
         $this->favoriModel->delete($id_recette, $id_utilisateur);
-        header("Location: " . strtok($_SERVER['REQUEST_URI'], '?'));
+        header("Location: ?c=home");
     }
 
     public function afficher(){

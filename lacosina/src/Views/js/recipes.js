@@ -8,6 +8,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let recipmodif = document.querySelectorAll(".modif");
 
+    let suppRecetteIcons = document.querySelectorAll(".supp-recette");
+
+    suppRecetteIcons.forEach(icon => {
+        const id_recette = icon.dataset.id;
+
+        icon.addEventListener("mouseover", (event) => {
+            icon.style.cursor = 'pointer';
+        });
+
+        icon.addEventListener('mouseout', (event) => {
+            icon.style.pointer = '';
+        });
+
+         icon.addEventListener("click", (event) => {
+            const id_recette = icon.dataset.id;
+            window.open(`index.php?c=Recette&a=supprimer&id=${id_recette}`, '_self');
+        });
+    });
+
     favIcons.forEach(icon => {
         icon.addEventListener("mouseover", (event) => {
             icon.style.cursor = 'pointer';
@@ -52,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
         recipe.addEventListener('click', (event) => {
             event.preventDefault(); // Empêche le comportement par défaut
             let recipeId = recipe.dataset.id; // Récupère l'ID de la recette
-            window.open(`index.php?c=Recette&a=detail&id=${recipeId}`, '_self'); // Ouvre le détail dans un nouvel onglet
+            window.open(`index.php?c=Recette&a=detail&id=${recipeId}`, '_self'); // Ouvre le détail 
         });
     });
 

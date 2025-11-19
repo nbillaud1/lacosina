@@ -26,5 +26,22 @@
     <?php }?>
 <?php } ?>
 
-
+<div class="btn btn-primary" id="btn-ajout-commentaire" data-id="<?php echo $recipe['id'];?>">Ajouter un commentaire</div>
 <a href="?c=Recette&a=index" class="btn btn-primary">Retour à liste des recettes</a>
+
+<h2>Commentaires</h2>
+<div id="commentaires">
+    <?php if (empty($commentaires)) : ?>
+        <p>Aucun commentaire pour cette recette.</p>
+    <?php else : ?>
+        <ul>
+            <?php foreach ($commentaires as $commentaire) : ?>
+                <li>
+                    <strong><?php echo htmlspecialchars($commentaire['pseudo']); ?></strong>
+                    <em><?php echo htmlspecialchars($commentaire['create_time']); ?></em>
+                    <p><?php echo nl2br(htmlspecialchars($commentaire['commentaire'])); ?></p>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
+</div>

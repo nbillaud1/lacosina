@@ -1,10 +1,12 @@
 <?php
 session_start();
-// import de la classe RecetteController
-require_once(__DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Controllers' . DIRECTORY_SEPARATOR . 'RecetteController.php');
-require_once(__DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Controllers' . DIRECTORY_SEPARATOR . 'ContactController.php');
-require_once(__DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Controllers' . DIRECTORY_SEPARATOR . 'UserController.php');
-require_once(__DIR__ . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Controllers' . DIRECTORY_SEPARATOR . 'FavoriController.php');
+
+require 'vendor/autoload.php';
+use App\R301\Controller\RecetteController;
+use App\R301\Controller\ContactController;
+use App\R301\Controller\UserController;
+use App\R301\Controller\FavoriController;
+use App\R301\Controller\CommentaireController;
 
 // ajout de l'en tête
 if (!isset($_GET['x'])) {
@@ -16,6 +18,7 @@ $controller = isset($_GET['c']) ? $_GET['c'] : 'home';
 $action = isset($_GET['a']) ? $_GET['a'] : 'index';
 $id_recette = isset($_GET['id']) ? $_GET['id'] : null;
 $id_usr = isset($_GET['id_usr']) ? $_GET['id_usr'] : null;
+$id_commentaire = isset($_GET['id']) ? $_GET['id'] : null;
 
 // définition des routes disponibles
 switch ($controller) {
@@ -42,6 +45,12 @@ switch ($controller) {
                 break;
             case 'modifier':
                 $recetteController->modifier($id_recette);
+                break;
+            case 'lister-commentaires':
+                $recetteController->listerCommentaires();
+                break;
+            case 'supprimer':
+                $recetteController->supprimer($id_recette);
                 break;
         }
         break;
@@ -102,6 +111,24 @@ switch ($controller) {
                     $favoriController->supprimer($id_recette);
                     break;
             }
+
+        case 'Commentaire':
+            $commentaireController = new CommentaireController();
+            switch ($action) {
+                case 'ajouter':
+                    $commentaireController->ajouter($id_recette);
+                    break;
+
+                case 'supprimer':
+                    $commentaireController->supprimer($id_commentaire);
+                    break;
+            }
+            break;
+
+        default:
+            $_SESSION['message'] = ['danger' => 'Page non trouvée'];
+            header("Location: ?c=home");
+            break;
 }
 
 

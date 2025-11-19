@@ -15,6 +15,7 @@ integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIe
 crossorigin="anonymous"></script>
 <script src="src/Views/js/recipes.js" defer></script>
 <script src="src/Views/js/users.js" defer></script>
+<script src="src/Views/js/commentaires.js" defer></script>
 </head>
 <body>
 <!-- menu de navigation -->
@@ -33,12 +34,17 @@ crossorigin="anonymous"></script>
             <li class="nav-item">
                 <a class="nav-link" href="?c=Recette&a=ajouter">Ajouter une recette</a>
             </li>
-            <li>
+            <li class="nav-item">
                 <a href="?c=Favori&a=favoris" class="nav-link">Mes recettes favorites</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="?c=User&a=profil">Profil de <?php echo $_SESSION['identifiant']?></a>
             </li>
+             <?php if (isset($_SESSION['isAdmin']) && $_SESSION['isAdmin'] == 1) { ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="?c=Recette&a=lister-commentaires">Lister les commentaires</a>
+                </li>
+            <?php } ?>
         <?php } ?>
     </ul>
     <ul class="navbar-nav">
