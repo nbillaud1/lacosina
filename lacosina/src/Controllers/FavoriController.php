@@ -1,7 +1,9 @@
 <?php
 
 // connexion à la base de données
-require_once("src/Models/Favori.php");
+namespace App\R301\Controller;
+use App\R301\Model\Favori;
+use App\R301\Model\Recette;
 
 class FavoriController {
 

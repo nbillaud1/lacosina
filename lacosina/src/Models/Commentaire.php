@@ -1,5 +1,8 @@
 <?php
-require_once("src/Models/Database.php");
+
+namespace App\R301\Model;
+use App\R301\Model\Database;
+use PDO;
 
 class Commentaire {
     private $conn;

@@ -19,6 +19,7 @@ $action = isset($_GET['a']) ? $_GET['a'] : 'index';
 $id_recette = isset($_GET['id']) ? $_GET['id'] : null;
 $id_usr = isset($_GET['id_usr']) ? $_GET['id_usr'] : null;
 $id_commentaire = isset($_GET['id']) ? $_GET['id'] : null;
+$filtre = isset($_GET['filtre']) ? $_GET['filtre'] : null;
 
 // définition des routes disponibles
 switch ($controller) {

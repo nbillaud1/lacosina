@@ -1,4 +1,9 @@
 <?php
+
+namespace App\R301\Model;
+use PDO;
+use PDOException;
+
 class Database {
     private $host = 'localhost';
     private $db_name = 'lacosina';

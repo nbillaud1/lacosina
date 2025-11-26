@@ -1,6 +1,4 @@
-// Écoute le chargement du DOM
-document.addEventListener('DOMContentLoaded', () => {
-
+function actionsRecipe(){
     // Sélectionne toutes les recettes avec la classe 'recipe'
     let recipes = document.querySelectorAll('.recipe');
 
@@ -89,6 +87,51 @@ document.addEventListener('DOMContentLoaded', () => {
          icon.addEventListener("click", (event) => {
             const id_recette = icon.dataset.id;
             window.open(`index.php?c=Recette&a=modifier&id=${id_recette}`, '_self');
+        });
+    });
+}
+
+// Écoute le chargement du DOM
+document.addEventListener('DOMContentLoaded', () => {
+    actionsRecipe();
+
+    let btnsFiltre = document.querySelectorAll(".btnFiltre");
+    
+    let filtreTous = document.getElementById("filtreTous");
+    filtreTous.classList.add('bg-primary-subtle');
+
+    btnsFiltre.forEach(btnFiltre => {
+        btnFiltre.addEventListener('mouseover', (event) => {
+            btnFiltre.style.cursor = 'pointer';
+            btnFiltre.style.backgroundColor = 'lightgray';
+        });
+
+        btnFiltre.addEventListener('mouseout', (event) => {
+            btnFiltre.style.pointer = '';
+            btnFiltre.style.backgroundColor = '';
+        });
+
+        btnFiltre.addEventListener('click', (event) => {
+            btnsFiltre.forEach(o => o.classList.remove('bg-primary-subtle'))
+            btnFiltre.classList.add('bg-primary-subtle');
+            let filterValue = btnFiltre.dataset.filtre;
+            // Mettre à jour la liste des recettes avec le filtre par fetch qui renvoie une réponse en html
+            fetch('?c=Recette&a=index&filtre=' + filterValue)
+                .then(response => response.text()) // Récupère le texte de la réponse
+                .then(html => {
+
+                    // Parse le HTML pour créer un document DOM
+                    let parser = new DOMParser();
+                    let doc = parser.parseFromString(html, 'text/html');
+
+                    // Sélectionner le div avec une classe ou un ID spécifique
+                    let divContent = doc.querySelector('#listeRecettes'); // Par exemple, un div avec l'ID "listeRecettes"
+
+                    // Change le contenu de la div listeRecettes avec le HTML récupéré filtré sur l'id listeRecettes
+                    document.getElementById('listeRecettes').innerHTML =
+                        divContent.innerHTML; // Affiche le HTML dans la div recipes
+                    actionsRecipe();
+                });
         });
     });
 });

@@ -1,7 +1,7 @@
 <?php
 
-// connexion à la base de données
-require_once("src/Models/Commentaire.php");
+namespace App\R301\Controller;
+use App\R301\Model\Commentaire;
 
 class CommentaireController {
 

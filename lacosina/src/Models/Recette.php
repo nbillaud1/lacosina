@@ -1,5 +1,8 @@
 <?php
-require_once("src/Models/Database.php");
+
+namespace App\R301\Model;
+use App\R301\Model\Database;
+use PDO;
 
 class Recette {
     private $conn;
@@ -39,27 +42,29 @@ class Recette {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function add($titre, $description, $auteur, $image) {
-        $query = "INSERT INTO recettes (titre, description, auteur, image, date_creation)
-        VALUES (:titre, :description, :auteur, :image, NOW())";
+    public function add($titre, $description, $auteur, $image, $type_plat) {
+        $query = "INSERT INTO recettes (titre, description, auteur, image, date_creation, type_plat)
+        VALUES (:titre, :description, :auteur, :image, NOW(), :type_plat)";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':titre', $titre);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':auteur', $auteur);
         $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':type_plat', $type_plat);
         $stmt->execute();
         return $this->conn->lastInsertId();
     }
 
-    public function update($id, $titre, $description, $auteur, $image) {
+    public function update($id, $titre, $description, $auteur, $image, $type_plat) {
         $query = "UPDATE recettes SET titre = :titre, description = :description, auteur =
-        :auteur, image = :image WHERE id = :id";
+        :auteur, image = :image, type_plat = :type_plat WHERE id = :id";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->bindParam(':titre', $titre);
         $stmt->bindParam(':description', $description);
         $stmt->bindParam(':auteur', $auteur);
         $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':type_plat', $type_plat);
         return $stmt->execute();
     }
 

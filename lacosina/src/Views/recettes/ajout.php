@@ -21,6 +21,15 @@
     </div>
 
     <div class="mb-3">
+        <label for="type_plat" class="form-label">Type du plat</label>
+        <select id="type_plat" name="type_plat" class="form-control" required>
+            <option value="entree">Entrée</option>
+            <option value="plat">Plat</option>
+            <option value="dessert">Dessert</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
         <button type="submit" class="btn btn-primary" id="enregistrer">Enregistrer</button>
     </div>
 </form>
